@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Water Hyacinth Investigations · Investigaciones del lirio acuático</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{--navy:#0c2747;--navy2:#14406f;--orange:#f05023;--tok:clamp(26px,7vw,46px);--gap:4px}
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{font-family:"Lato","Segoe UI","Helvetica Neue",Arial,sans-serif;color:#fff;min-height:100vh;
+    background:linear-gradient(180deg,var(--navy2),var(--navy) 60%);padding-bottom:120px}
+  body::before{content:"";display:block;height:6px;background:var(--orange)}
+  .wrap{max-width:1180px;margin:0 auto;padding:14px 16px 0}
+  .eyebrow{display:inline-block;font-size:13px;font-weight:900;letter-spacing:2px;text-transform:uppercase;background:var(--orange);
+    padding:4px 10px;border-radius:5px}
+  h1{margin:8px 0 2px;font-size:clamp(22px,5.5vw,40px);font-weight:900;line-height:1.1}
+  .es{display:block;font-style:italic;color:#bcd6f2;font-weight:400}
+  h1 + .es{font-size:clamp(15px,3.6vw,22px)}
+  .steps{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:6px}
+  .steps li{background:rgba(255,255,255,.08);border-radius:8px;padding:7px 10px;font-size:clamp(14px,3.6vw,18px);font-weight:700}
+  .steps li .es{font-size:.86em}
+  .steps .n{display:inline-flex;width:20px;height:20px;border-radius:50%;background:var(--orange);font-size:12px;align-items:center;justify-content:center;margin-right:6px;vertical-align:1px}
+  .stages{display:grid;grid-template-columns:auto auto;gap:12px;margin-top:14px;justify-content:center;align-items:end}
+  .stage{display:flex;flex-direction:column;align-items:center;gap:4px}
+  .stage.w4,.stage.w6{grid-column:1 / -1}
+  @media (min-width:1000px){ :root{--tok:38px} .stages{grid-template-columns:auto auto auto auto} .stage.w4,.stage.w6{grid-column:auto} }
+  .wl{white-space:nowrap}
+  .zone{position:relative;border-radius:12px;padding:34px 10px 10px;background:#e6f4ea;border:3px solid #6fae84;color:var(--navy);
+    display:grid;gap:var(--gap);justify-content:center;align-content:center;min-height:calc(var(--tok)*2 + var(--gap) + 44px);
+    transition:box-shadow .15s,border-color .15s}
+  .zone.c2{grid-template-columns:repeat(2,var(--tok))}
+  .zone.c4{grid-template-columns:repeat(4,var(--tok))}
+  .zone.c8{grid-template-columns:repeat(8,var(--tok))}
+  .zone.w6z{min-height:calc(var(--tok)*4 + var(--gap)*3 + 44px)}
+  .zone.drop{background:#f2faf4;border-style:dashed}
+  .zone.over{box-shadow:0 0 0 5px rgba(240,80,35,.6);border-color:var(--orange)}
+  .zone.ok{border-color:#2e9e57;border-style:solid;box-shadow:0 0 0 4px rgba(46,158,87,.5)}
+  .zone.notyet{border-color:var(--orange);border-style:solid}
+  .zone.armed{box-shadow:0 0 0 4px rgba(124,196,255,.7)}
+  .badge{position:absolute;right:6px;top:5px;min-width:32px;padding:2px 8px;border-radius:999px;background:var(--navy);color:#fff;font-size:15px;font-weight:900;text-align:center}
+  .verdict{position:absolute;left:6px;top:5px;padding:2px 8px;border-radius:999px;font-size:12px;font-weight:900;display:none}
+  .zone.ok .verdict{display:block;background:#2e9e57;color:#fff}
+  .zone.notyet .verdict{display:block;background:var(--orange);color:#fff}
+  .empty-q{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:56px;font-weight:900;color:#b7d9c2;pointer-events:none}
+  .zone:has(.tok) .empty-q{display:none}
+  .tok{width:var(--tok);height:var(--tok);touch-action:none;animation:pop .2s ease-out both}
+  .tok svg{width:100%;height:100%;display:block;pointer-events:none}
+  .zone.drop .tok{cursor:grab}
+  @keyframes pop{from{transform:scale(.3);opacity:0}to{transform:scale(1);opacity:1}}
+  .wl{font-size:clamp(15px,3.8vw,22px);font-weight:900}
+  .wl i{font-weight:400;color:#bcd6f2;margin-left:4px;font-size:.85em}
+  .think{margin:16px 0 0;background:rgba(255,255,255,.08);border-radius:12px;padding:12px 14px}
+  .think p{margin:0;font-weight:900;font-size:clamp(16px,4vw,22px)}
+  .think .st{margin-top:6px;font-weight:400;font-size:clamp(14px,3.5vw,18px)}
+  .credit{margin:14px 0 0;font-size:12px;opacity:.6}
+  .bank{position:fixed;left:0;right:0;bottom:0;z-index:20;background:#fff;color:var(--navy);box-shadow:0 -6px 24px rgba(0,0,0,.3);
+    padding:10px 12px calc(10px + env(safe-area-inset-bottom));display:flex;align-items:center;gap:10px;justify-content:center;flex-wrap:wrap}
+  .bank .bk{font-size:12px;font-weight:900;letter-spacing:1px;text-transform:uppercase;color:#6b7a8c;line-height:1.2}
+  .bank .bk i{display:block;text-transform:none;letter-spacing:0}
+  .item{display:flex;align-items:center;gap:8px;padding:6px 10px;border-radius:10px;border:2px dashed #9fb8a8;background:#f2faf4;
+    cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none}
+  .item.sel{border-style:solid;border-color:#3d8fd6;background:#e8f3fd}
+  .item .ic{display:grid;grid-template-columns:repeat(2,20px);gap:1px}
+  .item .ic svg{width:20px;height:20px}
+  .item .ic.one{display:block}.item .ic.one svg{width:40px;height:40px}
+  .item .pl{font-size:15px;font-weight:900;line-height:1.15}
+  .item .pl i{display:block;font-size:12px;font-weight:400;color:#5d6b7b}
+  .btns{display:flex;gap:6px}
+  .btns button{font:900 14px/1 "Lato",sans-serif;padding:10px 12px;border-radius:8px;border:0;cursor:pointer;background:#eef2f6;color:var(--navy)}
+  .btns button.primary{background:var(--orange);color:#fff}
+  .hint{width:100%;text-align:center;font-size:12px;color:#5d6b7b;margin:-2px 0 0}
+  .ghost{position:fixed;z-index:50;pointer-events:none;display:grid;gap:1px;transform:translate(-50%,-60%) scale(1.1);
+    filter:drop-shadow(0 6px 10px rgba(0,0,0,.45))}
+  .ghost.one{grid-template-columns:var(--tok)}
+  .ghost.four{grid-template-columns:repeat(2,var(--tok))}
+  .ghost svg{width:var(--tok);height:var(--tok)}
+
+  @media (max-width:640px){
+    .steps li{padding:5px 8px;font-size:13px}
+    .steps li .es{font-size:12px}
+    .bank{flex-wrap:nowrap;gap:6px;padding:8px 8px calc(6px + env(safe-area-inset-bottom));justify-content:space-between}
+    .bank .bk{display:none}
+    .item{padding:4px 7px;gap:5px}
+    .item .ic.one svg{width:30px;height:30px}
+    .item .ic{grid-template-columns:repeat(2,15px)}.item .ic svg{width:15px;height:15px}
+    .item .pl{font-size:13px}.item .pl i{font-size:11px}
+    .btns button{font-size:12px;padding:7px 8px;line-height:1.15}
+    .hint{font-size:11px}
+  }
+  .bank{flex-wrap:wrap}
+  .bank-row{display:flex;align-items:center;gap:10px;justify-content:center;width:100%}
+  .btns button i{display:block;font-style:normal;font-weight:400}
+
+  .tabs{display:flex;gap:6px;margin:10px 0 0}
+  .tabs a{flex:1;text-align:center;text-decoration:none;color:#fff;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);
+    padding:8px 6px;border-radius:8px;font-weight:900;font-size:clamp(13px,3.4vw,17px);line-height:1.15}
+  .tabs a i{display:block;font-weight:400;font-size:.85em;color:#bcd6f2}
+  .tabs a.on{background:var(--orange);border-color:var(--orange)}
+  .tabs a.on i{color:#ffe3d9}
+  [hidden]{display:none!important}
+  .tblwrap{position:relative;margin:14px auto 0;max-width:640px;padding:0 44px}
+  table.tt{width:100%;border-collapse:separate;border-spacing:0;background:#fff;color:var(--navy);border-radius:12px;overflow:hidden}
+  .tt th{background:#e9eef4;font-size:clamp(13px,3.4vw,17px);font-weight:900;padding:8px 4px;line-height:1.15;border-bottom:3px solid var(--navy)}
+  .tt th i{display:block;font-size:.8em;font-weight:400;color:#5d6b7b}
+  .tt td{height:56px;text-align:center;font-size:clamp(22px,6vw,30px);font-weight:900;border-top:1px solid #dbe3ec;position:relative}
+  .tt td + td{border-left:1px solid #dbe3ec}
+  .tt tr.pollrow td{background:#fff6f2}
+  .tt .chip{position:absolute;left:50%;bottom:2px;transform:translateX(-50%);font-size:10px;font-weight:900;white-space:nowrap;background:var(--orange);color:#fff;padding:1px 6px;border-radius:999px}
+  .tt input{width:min(120px,90%);height:42px;font:900 clamp(20px,5.5vw,26px)/1 "Lato",sans-serif;text-align:center;color:var(--navy);
+    border:2px dashed #9fb3c8;border-radius:8px;background:#f7fafc;outline:none}
+  .tt input:focus{border-style:solid;border-color:#3d8fd6;background:#fff}
+  .tt input.ok{border:3px solid #2e9e57;background:#eaf7ee}
+  .tt input.no{border:3px solid var(--orange);background:#fff2ec}
+  .rt{position:absolute;width:44px;font-size:15px;font-weight:900;display:flex;align-items:center;opacity:0;transition:opacity .3s}
+  .tblwrap.show .rt{opacity:1}
+  .rt.l{left:0;color:#7cc4ff;justify-content:flex-end;padding-right:2px}
+  .rt.r{right:0;color:#ffb59c;padding-left:2px}
+  .tbtns{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin:14px 0 0}
+  .tbtns button{font:900 14px/1.15 "Lato",sans-serif;padding:10px 12px;border-radius:8px;border:0;cursor:pointer;background:rgba(255,255,255,.16);color:#fff}
+  .tbtns button i{display:block;font-style:normal;font-weight:400}
+  .tbtns button.primary{background:var(--orange)}
+  .qs{margin:14px 0 0;display:grid;gap:8px}
+  .qs p{margin:0;background:rgba(255,255,255,.08);border-radius:10px;padding:10px 12px;font-weight:700;font-size:clamp(14px,3.6vw,18px)}
+  .qs p .es{font-size:.85em}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+  <g id="hy">
+    <ellipse cx="0" cy="14" rx="30" ry="9" fill="#0e2f2b" opacity=".35"/>
+    <ellipse cx="-14" cy="0" rx="17" ry="12" transform="rotate(-25 -14 0)" fill="#5c9a42" stroke="#2c5622" stroke-width="1.5"/>
+    <ellipse cx="14" cy="0" rx="17" ry="12" transform="rotate(25 14 0)" fill="#4e8a39" stroke="#2c5622" stroke-width="1.5"/>
+    <ellipse cx="0" cy="-10" rx="15" ry="12" fill="#67a34a" stroke="#2c5622" stroke-width="1.5"/>
+    <ellipse cx="0" cy="8" rx="16" ry="10" fill="#447e33" stroke="#2c5622" stroke-width="1.5"/>
+    <circle cx="-4" cy="-30" r="5" fill="#9d84cc"/><circle cx="5" cy="-34" r="5" fill="#b7a0dc"/><circle cx="-2" cy="-39" r="5" fill="#9d84cc"/>
+  </g>
+</defs></svg>
+
+<div class="wrap">
+  <span class="eyebrow">Explore</span>
+  <nav class="tabs">
+    <a href="#build" id="tabBuild">1 · Build the Pattern<i lang="es">Construye el patrón</i></a>
+    <a href="#table" id="tabTable">2 · Find the Pattern<i lang="es">Encuentra el patrón</i></a>
+  </nav>
+  <section id="vBuild">
+  <h1>Investigation 1: Build the Pattern</h1>
+  <span class="es" lang="es">Investigación 1: Construye el patrón</span>
+  <ol class="steps">
+    <li><span class="n">1</span>Look at Week 0 and Week 2.<span class="es" lang="es">Observa la Semana 0 y la Semana 2.</span></li>
+    <li><span class="n">2</span>How many plants belong in Week 4 and Week 6?<span class="es" lang="es">¿Cuántas plantas van en la Semana 4 y la Semana 6?</span></li>
+    <li><span class="n">3</span>Drag plants from the bank into the empty boxes.<span class="es" lang="es">Arrastra plantas del banco a las cajas vacías.</span></li>
+  </ol>
+
+  <div class="stages">
+    <div class="stage"><div class="zone fixed c2" data-fill="4"><span class="badge">4</span></div><div class="wl">Week 0<i lang="es">Semana 0</i></div></div>
+    <div class="stage"><div class="zone fixed c4" data-fill="8"><span class="badge">8</span></div><div class="wl">Week 2<i lang="es">Semana 2</i></div></div>
+    <div class="stage w4"><div class="zone drop c8" data-target="16"><span class="badge">0</span><span class="verdict"></span><span class="empty-q">?</span></div><div class="wl">Week 4<i lang="es">Semana 4</i></div></div>
+    <div class="stage w6"><div class="zone drop c8 w6z" data-target="32"><span class="badge">0</span><span class="verdict"></span><span class="empty-q">?</span></div><div class="wl">Week 6<i lang="es">Semana 6</i></div></div>
+  </div>
+
+  <div class="think">
+    <p>What pattern do you notice? <span class="es" lang="es">¿Qué patrón observas?</span></p>
+    <p class="st">Every 2 weeks, the number of plants… <span class="es" lang="es">Cada 2 semanas, el número de plantas…</span></p>
+  </div>
+  <p class="credit">Water hyacinth (lirio acuático) · San Benito resaca investigation · Algebra I</p>
+  </section>
+
+  <section id="vTable" hidden>
+  <h1>Investigation 2: Find the Pattern</h1>
+  <span class="es" lang="es">Investigación 2: Encuentra el patrón matemático</span>
+  <ol class="steps">
+    <li>Complete the table and look closely at the relationship between the number of weeks and the number of plants.<span class="es" lang="es">Completa la tabla y observa con atención la relación entre el número de semanas y el número de plantas.</span></li>
+  </ol>
+  <div class="tblwrap" id="tblwrap">
+    <table class="tt">
+      <colgroup><col style="width:30%"><col style="width:30%"><col style="width:40%"></colgroup>
+      <thead><tr><th>Week<i lang="es">Semana</i></th><th>2-week periods (x)<i lang="es">Periodos de 2 semanas</i></th><th>Plants<i lang="es">Plantas</i></th></tr></thead>
+      <tbody>
+        <tr><td>0</td><td>0</td><td>4</td></tr>
+        <tr><td>2</td><td>1</td><td>8</td></tr>
+        <tr><td>4</td><td>2</td><td><input class="ans" type="text" inputmode="numeric" autocomplete="off" data-ans="16" aria-label="Plants after 4 weeks"></td></tr>
+        <tr><td>6</td><td>3</td><td><input class="ans" type="text" inputmode="numeric" autocomplete="off" data-ans="32" aria-label="Plants after 6 weeks"></td></tr>
+        <tr><td>8</td><td>4</td><td><input class="ans" type="text" inputmode="numeric" autocomplete="off" data-ans="64" aria-label="Plants after 8 weeks"></td></tr>
+        <tr class="pollrow"><td>10<span class="chip">Poll · Encuesta</span></td><td>5</td><td><input class="ans" type="text" inputmode="numeric" autocomplete="off" data-ans="128" aria-label="Plants after 10 weeks"></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="tbtns">
+    <button type="button" class="primary" id="tCheck">Check<i lang="es">Revisar</i></button>
+    <button type="button" id="tShow">Show pattern<i lang="es">Mostrar patrón</i></button>
+    <button type="button" id="tClear">Clear<i lang="es">Borrar</i></button>
+  </div>
+  <div class="qs">
+    <p>1. How do the plants change from one row to the next?<span class="es" lang="es">¿Cómo cambian las plantas de una fila a la siguiente?</span></p>
+    <p>2. How is that different from how the weeks change?<span class="es" lang="es">¿En qué es diferente de cómo cambian las semanas?</span></p>
+    <p>3. Was your prediction for Week 10 correct?<span class="es" lang="es">¿Fue correcta tu predicción para la Semana 10?</span></p>
+  </div>
+  <p class="credit">Water hyacinth (lirio acuático) · San Benito resaca investigation · Algebra I</p>
+  </section>
+</div>
+
+<div class="bank" id="bank"><div class="bank-row">
+  <div class="bk">Plant bank<i lang="es">Banco de plantas</i></div>
+  <div class="item" data-n="1"><div class="ic one"><svg viewBox="-40 -42 80 80"><use href="#hy"/></svg></div><div class="pl">1 plant<i lang="es">1 planta</i></div></div>
+  <div class="item" data-n="4"><div class="ic"><svg viewBox="-40 -42 80 80"><use href="#hy"/></svg><svg viewBox="-40 -42 80 80"><use href="#hy"/></svg><svg viewBox="-40 -42 80 80"><use href="#hy"/></svg><svg viewBox="-40 -42 80 80"><use href="#hy"/></svg></div><div class="pl">4 plants<i lang="es">4 plantas</i></div></div>
+  <div class="btns"><button type="button" class="primary" id="check">Check<i lang="es">Revisar</i></button><button type="button" id="clear">Clear<i lang="es">Borrar</i></button></div>
+  </div>
+  <p class="hint" id="hint">Drag a plant into a box, or tap a plant and then tap a box. · <span lang="es">Arrastra una planta, o toca una planta y luego una caja.</span></p>
+</div>
+
+<script>
+(function(){
+  const TOK = '<svg viewBox="-40 -42 80 80"><use href="#hy"/></svg>';
+  const count = z => z.querySelectorAll('.tok').length;
+  function tokEl(){ const t=document.createElement('span'); t.className='tok'; t.innerHTML=TOK; return t; }
+  function update(z){ z.querySelector('.badge').textContent = count(z); z.classList.remove('ok','notyet'); }
+  document.querySelectorAll('.zone.fixed').forEach(z=>{ for(let i=0;i<+z.dataset.fill;i++) z.appendChild(tokEl()); });
+  function add(z,n){ for(let i=0;i<n && count(z)<64;i++) z.appendChild(tokEl()); update(z); }
+  const zoneAt = (x,y) => { const el=document.elementFromPoint(x,y); return el ? el.closest('.zone.drop') : null; };
+
+  let drag=null, selected=null;
+  function setSelected(it){
+    document.querySelectorAll('.item').forEach(i=>i.classList.toggle('sel', i===it));
+    document.querySelectorAll('.zone.drop').forEach(z=>z.classList.toggle('armed', !!it));
+    selected = it;
+  }
+  function begin(e, n, origin){
+    drag = {n, origin, x0:e.clientX, y0:e.clientY, moved:false, g:null, over:null, id:e.pointerId};
+    window.addEventListener('pointermove', move, {passive:false});
+    window.addEventListener('pointerup', end);
+    window.addEventListener('pointercancel', end);
+  }
+  const bank = document.getElementById('bank');
+  function pad(){ document.body.style.paddingBottom = bank.hidden ? '24px' : (bank.offsetHeight + 24) + 'px'; }
+  pad(); addEventListener('resize', pad);
+  function hover(x,y){
+    const z=zoneAt(x,y);
+    if(z!==drag.over){ if(drag.over) drag.over.classList.remove('over'); if(z) z.classList.add('over'); drag.over=z; }
+  }
+  function autoScroll(){
+    if(!drag || !drag.moved) return;
+    const top = 70, bottom = innerHeight - bank.offsetHeight - 40;
+    let dy = 0;
+    if(drag.ly < top) dy = -Math.min(18, (top - drag.ly)/3 + 4);
+    else if(drag.ly > bottom) dy = Math.min(18, (drag.ly - bottom)/3 + 4);
+    if(dy){ window.scrollBy(0, dy); hover(drag.lx, drag.ly); }
+    requestAnimationFrame(autoScroll);
+  }
+  function move(e){
+    if(!drag || e.pointerId!==drag.id) return;
+    e.preventDefault();
+    drag.lx = e.clientX; drag.ly = e.clientY;
+    if(!drag.moved && Math.hypot(e.clientX-drag.x0, e.clientY-drag.y0) < 8) return;
+    if(!drag.moved){
+      drag.moved = true;
+      if(drag.origin && drag.origin.tok){ drag.origin.tok.remove(); update(drag.origin.zone); }
+      const g=document.createElement('div'); g.className='ghost '+(drag.n===4?'four':'one'); g.innerHTML=TOK.repeat(drag.n);
+      document.body.appendChild(g); drag.g=g; setSelected(null);
+      requestAnimationFrame(autoScroll);
+    }
+    drag.g.style.left=e.clientX+'px'; drag.g.style.top=e.clientY+'px';
+    hover(e.clientX, e.clientY);
+  }
+  function end(e){
+    window.removeEventListener('pointermove', move); window.removeEventListener('pointerup', end); window.removeEventListener('pointercancel', end);
+    if(!drag) return;
+    const d=drag; drag=null;
+    if(d.over) d.over.classList.remove('over');
+    if(d.moved){
+      const z=zoneAt(e.clientX,e.clientY);
+      if(z) add(z,d.n);
+      d.g.remove();
+    } else if(d.origin && d.origin.item){
+      setSelected(selected===d.origin.item ? null : d.origin.item);
+    }
+  }
+  document.querySelectorAll('.item').forEach(it=>{
+    it.addEventListener('pointerdown', e=>{ e.preventDefault(); begin(e, +it.dataset.n, {item:it}); });
+  });
+  document.querySelectorAll('.zone.drop').forEach(z=>{
+    z.addEventListener('pointerdown', e=>{
+      const t=e.target.closest('.tok');
+      if(t){ e.preventDefault(); begin(e, 1, {tok:t, zone:z}); }
+    });
+    z.addEventListener('click', e=>{ if(selected && !e.target.closest('.tok')) add(z, +selected.dataset.n); });
+  });
+  document.getElementById('check').addEventListener('click', ()=>{
+    document.querySelectorAll('.zone.drop').forEach(z=>{
+      const ok = count(z) === +z.dataset.target;
+      z.classList.toggle('ok',ok); z.classList.toggle('notyet',!ok);
+      z.querySelector('.verdict').textContent = ok ? '✓' : 'Not yet · Todavía no';
+    });
+  });
+  document.getElementById('clear').addEventListener('click', ()=>{
+    document.querySelectorAll('.zone.drop').forEach(z=>{ z.querySelectorAll('.tok').forEach(t=>t.remove()); update(z); });
+    setSelected(null);
+  });
+
+  /* ---- views ---- */
+  const vB=document.getElementById('vBuild'), vT=document.getElementById('vTable');
+  function route(){
+    const t = location.hash === '#table';
+    vB.hidden = t; vT.hidden = !t; bank.hidden = t;
+    document.getElementById('tabBuild').classList.toggle('on', !t);
+    document.getElementById('tabTable').classList.toggle('on', t);
+    document.body.style.paddingBottom = t ? '24px' : (bank.offsetHeight + 24) + 'px';
+  }
+  addEventListener('hashchange', route); route();
+
+  /* ---- table ---- */
+  const tw = document.getElementById('tblwrap');
+  const ins = [...tw.querySelectorAll('input.ans')];
+  ins.forEach((inp,i)=>{
+    inp.addEventListener('input', ()=>{ inp.value = inp.value.replace(/[^0-9]/g,'').slice(0,6); inp.classList.remove('ok','no'); });
+    inp.addEventListener('keydown', e=>{ if(e.key==='Enter'){ e.preventDefault(); if(ins[i+1]) ins[i+1].focus(); else inp.blur(); } });
+  });
+  // +2 / x2 labels between rows, placed from the real row positions
+  function placeRatios(){
+    tw.querySelectorAll('.rt').forEach(r=>r.remove());
+    const rows = [...tw.querySelectorAll('tbody tr')], top0 = tw.getBoundingClientRect().top;
+    for(let i=0;i<rows.length-1;i++){
+      const a = rows[i].getBoundingClientRect(), b = rows[i+1].getBoundingClientRect();
+      const y = (a.top + a.bottom)/2 - top0, hgt = (b.top + b.bottom)/2 - (a.top + a.bottom)/2;
+      [['l','+2 ⤵'],['r','⤶ ×2']].forEach(([side,txt])=>{
+        const d=document.createElement('div'); d.className='rt '+side; d.style.top=y+'px'; d.style.height=hgt+'px'; d.textContent=txt; tw.appendChild(d);
+      });
+    }
+  }
+  document.getElementById('tCheck').addEventListener('click', ()=>{
+    ins.forEach(inp=>{ const ok = inp.value!=='' && +inp.value === +inp.dataset.ans; inp.classList.toggle('ok',ok); inp.classList.toggle('no',!ok); });
+  });
+  document.getElementById('tShow').addEventListener('click', ()=>{ placeRatios(); tw.classList.toggle('show'); });
+  document.getElementById('tClear').addEventListener('click', ()=>{ ins.forEach(inp=>{ inp.value=''; inp.classList.remove('ok','no'); }); tw.classList.remove('show'); });
+  addEventListener('resize', ()=>{ if(tw.classList.contains('show')) placeRatios(); });
+})();
+</script>
+</body>
+</html>
